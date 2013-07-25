@@ -20,6 +20,8 @@ def hello():
 		image = 'static/fourohfargoth.png'
 
 
-	return render_template('scroll.html', image=image)
+	resp = render_template('scroll.html', image=image)
+	resp.headers['Access-Control-Allow-Origin'] = '*'
+	return resp
 
 #app.run()
