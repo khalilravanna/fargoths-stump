@@ -24,7 +24,7 @@ def hello():
 			image = 'static/fourohfargoth.png'
 
 		if request.args.get('json'):
-			return json.dumps({'image': image, 'request_time': now_readable})
+			return (json.dumps({'image': image, 'request_time': now_readable}), 200, {'Access-Control-Allow-Origin': '*'})
 		else:
 			return (render_template('scroll.html', image=image), 200, {'Access-Control-Allow-Origin': '*'})
 
