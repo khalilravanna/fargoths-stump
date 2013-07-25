@@ -19,9 +19,9 @@ def hello():
 	except:
 		image = 'static/fourohfargoth.png'
 
-
-	resp = render_template('scroll.html', image=image)
-	resp.headers['Access-Control-Allow-Origin'] = '*'
-	return resp
+	return (render_template('scroll.html', image=image), 200, {'Access-Control-Allow-Origin': '*'})
+	#print resp
+	#resp.headers['Access-Control-Allow-Origin'] = '*'
+	#return resp
 
 #app.run()
