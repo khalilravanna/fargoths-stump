@@ -17,7 +17,9 @@ def hello():
 	try: 
 		image = soup.find(attrs={"class": "image"}).img['src']
 	except:
-		image = 'img/fourohfargoth.png'
+		image = 'static/fourohfargoth.png'
 
 
 	return render_template('scroll.html', image=image)
+
+app.run()
