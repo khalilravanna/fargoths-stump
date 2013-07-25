@@ -5,13 +5,38 @@
         </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Henny+Penny|Diplomata+SC' rel='stylesheet' type='text/css'>
         <style type="text/css">
+            h1 {
+                font-family: 'Henny Penny', cursive;
+            }
+            body {
+               font-family: 'Henny Penny', cursive; 
+            }
         </style>
     </head>
     <body style="background-color:black;">
-    	<div class="span12">
-    		<h1 class="vertical" style="color:white">Welcome to Ol' Fargoth's Stump</h1>
-			<img style="text-align:center; width:600px; height:600px;" class="img-polaroid" src="{{ image }}">
+        <div class="row">
+            <div class="span12">
+                <h1 class="vertical" style="color:white">Welcome to Ol' Fargoth's Stump</h1>
+            </div>
+        </div>
+    	<div class="span4">
+			<img style="text-align:center; width:400px; height:400px;" class="img-polaroid" src="{{ image }}">
     	</div>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
+        <script type="text/javascript">
+            var imagesReceived = {};
+            setInterval(function () {
+                $.get('/?json=true', function (data) {
+                    var response = $.parseJSON(data);
+                    if (!imagesReceived[response.image]) {
+                        var image = '<div class="span4"><img style="text-align:center; width:400px; height:400px;" class="img-polaroid" src="'+ response.image +'"></img></div>';
+                        $('body').append(image);
+                    }
+                    imagesReceived[response.image] = true;
+                });
+            }, 1000);
+        </script>
 	</body>
 </html>
