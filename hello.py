@@ -22,4 +22,4 @@ def hello():
 
 	return render_template('scroll.html', image=image)
 
-app.run()
+#app.run()
