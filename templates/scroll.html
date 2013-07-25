@@ -30,7 +30,7 @@
             setInterval(function () {
                 $.get('/?json=true', function (data) {
                     var response = $.parseJSON(data);
-                    if (!imagesReceived[response.image]) {
+                    if (!imagesReceived[response.image]) { // FUTURE: make this optional so they can see repeats if they want
                         var image = '<div class="span4"><img style="text-align:center; width:400px; height:400px;" class="img-polaroid" src="'+ response.image +'"></img></div>';
                         $('body').append(image);
                     }

@@ -32,4 +32,4 @@ def hello():
 		else:
 			return (render_template('scroll.html', image=image), 200, {'Access-Control-Allow-Origin': '*'})
 
-app.run()
+#app.run()
