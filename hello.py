@@ -5,7 +5,8 @@ from BeautifulSoup import BeautifulSoup
 
 app = Flask(__name__)
 
-url_for('static', filename='fourohfargoth.png')
+with app.test_request_context():
+	url_for('static', filename='fourohfargoth.png')
 
 @app.route('/')
 def hello():
