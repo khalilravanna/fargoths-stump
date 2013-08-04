@@ -1,26 +1,14 @@
-function ScrollsCtrl ($scope, $http, $timeout) {
+function ScrollsCtrl ($scope, $http) {
 	$scope.name = 'Stefan';
 	$scope.npcs = [
 		[]
 	];
 	var lastIndex = 0;
-
 	$scope.$evalAsync(function () {
-		myIntervalFunction();
-	})
-
-	var myIntervalFunction = function() {
-	    cancelRefresh = $timeout(function myFunction() {
-	    	$scope.getNPC();
-	        cancelRefresh = $timeout(myFunction, 1000);
-	    },1000);
-	};
-	console.log('Started.');
-
-	$scope.getNPC = function () {
-		console.log('Requesting NPC');
+		$scope.test();
+	});
+	$scope.test = function () {
 		$http.get('/npc').then(function (response) {
-			console.log('Returned NPC');
 			if ($scope.npcs[lastIndex].length < 3) {
 				$scope.npcs[lastIndex].push(response.data)
 			}
@@ -28,6 +16,7 @@ function ScrollsCtrl ($scope, $http, $timeout) {
 				lastIndex++;
 				$scope.npcs[lastIndex] = [response.data];
 			}
+			$scope.test();
 		});
 	};
 }
