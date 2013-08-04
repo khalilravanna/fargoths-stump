@@ -4,6 +4,7 @@ function ScrollsCtrl ($scope, $http) {
 		[]
 	];
 	var lastIndex = 0;
+	var totalCounter = 0;
 	$scope.$evalAsync(function () {
 		$scope.test();
 	});
@@ -16,7 +17,11 @@ function ScrollsCtrl ($scope, $http) {
 				lastIndex++;
 				$scope.npcs[lastIndex] = [response.data];
 			}
-			$scope.test();
+			if (totalCounter < 8) {
+				totalCounter++;
+				console.log(totalCounter);
+				$scope.test();
+			}
 		});
 	};
 }
