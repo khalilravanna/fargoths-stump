@@ -10,7 +10,11 @@ def favicon():
     return app.send_static_file("favicon.ico")
 
 @app.route('/', methods=['GET'])
-def hello():
+def home():
+	return render_template('scroll-angular.html')
+
+@app.route('/old', methods=['GET'])
+def oldStump():
 	import datetime, time
 
 	if request.method == 'GET':
@@ -106,8 +110,4 @@ def npc():
 	#return render_template('scroll-angular.html', image=image, content=content, title=title)
 	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
-@app.route('/test', methods=['GET'])
-def test():
-	return render_template('scroll-angular.html')
-
-app.run(debug=True)
+#app.run(debug=True)
