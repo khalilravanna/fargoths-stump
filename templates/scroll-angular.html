@@ -1,0 +1,36 @@
+<html ng-app="scrolls">
+	<head>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="static/css/app.css" />
+	</head>
+	<body style="margin-top:20px;" ng-controller="ScrollsCtrl">
+		{% raw %}
+        <div ng-repeat="list in npcs">
+        	<div class="row">
+	            <div  ng-repeat="npc in list" class="large-4 columns">
+	                <div class="panel">
+	                    <p>
+	                        <img ng-src="{{ npc.image }}" />
+	                    </p>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="row">
+		        <div  ng-repeat="npc in list" class="large-4 columns">
+		            <div style="height:217px; overflow-y:scroll;" class="panel">
+		                <h5>{{ npc.title }}</h5>
+		                <p ng-bind-html-unsafe="npc.content"></p>
+		            </div>
+		        </div>
+	        </div>
+        </div>
+
+        <div style="text-align:center;" class="row">
+        	<button class="large button expand" ng-click="getNPC()">Test</button>
+        </div>
+        {% endraw %}
+		<script type="text/javascript" src="http://code.angularjs.org/1.1.5/angular.js"></script>
+		<script type="text/javascript" src="static/javascripts/scrolls.js"></script>
+		<script type="text/javascript" src="static/javascripts/directives.js"></script>
+	</body>
+</html>

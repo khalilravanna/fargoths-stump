@@ -51,10 +51,12 @@ def foundation():
 
 	return render_template('scroll-foundation.html', image=image, content=content)
 
-@app.route('/test', methods=['GET'])
-def test():
-	import random
+@app.route('/npc', methods=['GET'])
+def npc():
+	import json, random, time
 	from bs4 import BeautifulSoup
+
+	start = time.time();
 
 	# hardcode urls for npc pages
 	npc_urls = ['http://www.uesp.net/wiki/Category:Morrowind-NPC_Images', 
@@ -69,6 +71,8 @@ def test():
 	soup = BeautifulSoup(urllib2.urlopen(npc_urls[random_page]))
 	items = soup.find_all('li', 'gallerybox')
 
+	print 'Opened index page in %s seconds' % (time.time()-start)
+
 	num = random.randint(0, len(items)-1)
 
 	link = items[num].find('a').get('href')
@@ -77,20 +81,33 @@ def test():
 	soup = BeautifulSoup(urllib2.urlopen(link))
 	image = soup.find('div', 'fullImageLink').find('a').get('href')
 
+	print 'Opened image page in %s seconds' % (time.time()-start)
+
 	page = soup.find(id='mw-imagepage-linkstoimage-ns110').find('a').get('href') # ns110 seems to be the code for the actual page
 	page = 'http://www.uesp.net' + page
 	
 	soup = BeautifulSoup(urllib2.urlopen(page))
 	paragraphs = soup.find('div', 'mw-content-ltr').find_all('p') 
-	title = paragraphs[6].find('b').text
+
+	print 'Opened npc page in %s seconds' % (time.time()-start)
+
+	try:
+		title = paragraphs[6].find('b').text
+	except:
+		title = ''
 	content = ''
 	# for some reason the 7th paragrph is the start of the ones about the character
 	for num in range(6, len(paragraphs)):
 		content = content + str(paragraphs[num])
-	print content
+	#print content
 
-	return render_template('scroll-foundation.html', image=image, content=content, title=title)
+	print 'Total time: %s seconds' % (time.time()-start)
 
+	#return render_template('scroll-angular.html', image=image, content=content, title=title)
+	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
+@app.route('/test', methods=['GET'])
+def test():
+	return render_template('scroll-angular.html')
 
-app.run()
+app.run(debug=True)
