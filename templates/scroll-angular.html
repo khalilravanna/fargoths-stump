@@ -1,13 +1,28 @@
-<html ng-app="scrolls">
+<html style="background-color:#fff0cf;" ng-app="scrolls">
 	<head>
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Henny+Penny' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="static/css/app.css" />
+		<style type="text/css">
+            h1 {
+                font-family: 'Henny Penny', cursive;
+                color: #0c0c0c;
+            }
+            .center {
+            	text-align: center;
+            }
+        </style>
 	</head>
-	<body style="margin-top:20px;" ng-controller="ScrollsCtrl">
+	<body style="background-color:#fff0cf; margin-top:20px;" ng-controller="ScrollsCtrl">
+		<div style="border-radius:10px; border-color:#1cbabc; background-color:#68c39f;" class="row panel">
+			<img style="float:right; width:50px; height:50px" src="static/images/fargoth-head-trans.png">
+			<img style="float:left; width:50px; height:50px" src="static/images/fargoth-head-trans.png">
+			<h1 class="center">Fargoth's Stump</h1>
+		</div>
 		{% raw %}
         <div ng-repeat="list in npcs">
         	<div class="row">
-	            <div  ng-repeat="npc in list" class="large-4 columns">
+	            <div ng-repeat="npc in list" class="large-4 columns">
 	                <div class="panel">
 	                    <p>
 	                        <img ng-src="{{ npc.image }}" />
@@ -16,7 +31,7 @@
 	            </div>
 	        </div>
 	        <div class="hide-for-small row">
-		        <div  ng-repeat="npc in list" class="large-4 columns">
+		        <div ng-repeat="npc in list" ng-show="npc.content" class="large-4 columns">
 		            <div style="height:217px; overflow-y:scroll;" class="panel">
 		                <h5>{{ npc.title }}</h5>
 		                <p ng-bind-html-unsafe="npc.content"></p>
