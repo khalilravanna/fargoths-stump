@@ -24,10 +24,14 @@
 			.fargoth:hover {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
 			}
+
+			.header:hover .fargoth {
+				box-shadow: 0px 0px 0px 0pt #fff0cf;
+			}
         </style>
 	</head>
 	<body style="background-color:#fff0cf; margin-top:20px;" ng-controller="ScrollsCtrl">
-		<div style="border-radius:10px; border-color:#1cbabc; background-color:#68c39f;" class="row panel">
+		<div style="border-radius:10px; border-color:#1cbabc; background-color:#68c39f;" class="header row panel">
 			<a href="http://whats.gd" target="_blank">
 				<img class="fargoth" style="float:right; width:50px; height:50px" src="static/images/fargoth-head-trans.png">
 			</a>
@@ -35,7 +39,7 @@
 				<img class="fargoth" style="float:left; width:50px; height:50px" src="static/images/fargoth-head-trans.png">
 			</a>
 			
-			<h1 class="center">Fargoth's Stump</h1>
+			<h1 class="center title">Fargoth's Stump</h1>
 		</div>
 		{% raw %}
         <div ng-repeat="list in npcs">
