@@ -110,4 +110,4 @@ def npc():
 	#return render_template('scroll-angular.html', image=image, content=content, title=title)
 	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
-#app.run(debug=True)
+app.run(debug=True)

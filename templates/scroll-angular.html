@@ -41,12 +41,12 @@
 			
 			<h1 class="center title">Fargoth's Stump</h1>
 		</div>
-		<div ng-hide="npcs.length" class="center row">
-			<h1>Loading... </h1>
-			<img class="icon-spin" style="width:200px; height:200px" src="static/images/fargoth-head-trans.png">
+
+		<div ng-show="npcs.length < 2" style="max-width:242px; background-color:#fa6a6a; border-radius:150px;" class="center row panel">
+			<img class="icon-spin" style="width:200px; height:200px" src="static/images/loading-fargoth.png">
 		</div>
 		{% raw %}
-        <div ng-repeat="list in npcs">
+        <div ng-hide="npcs.length < 2" ng-repeat="list in npcs">
         	<div class="row">
 	            <div ng-repeat="npc in list" class="large-4 columns">
 	                <div class="panel">
