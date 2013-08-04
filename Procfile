@@ -1,1 +1,1 @@
-web: gunicorn scrolls:app
+web: gunicorn scroll:app
