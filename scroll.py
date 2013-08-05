@@ -85,6 +85,9 @@ def npc():
 	soup = BeautifulSoup(urllib2.urlopen(link))
 	image = soup.find('div', 'fullImageLink').find('a').get('href')
 
+	if request.args.get('json'):
+		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
+
 	print 'Opened image page in %s seconds' % (time.time()-start)
 
 	page = soup.find(id='mw-imagepage-linkstoimage-ns110').find('a').get('href') # ns110 seems to be the code for the actual page
