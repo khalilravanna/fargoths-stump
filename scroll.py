@@ -96,7 +96,8 @@ def npc():
 	link = 'http://www.uesp.net' + link
 
 	soup = BeautifulSoup(urllib2.urlopen(link))
-	#image = soup.find('div', 'fullImageLink').find('a').get('href')
+	if request.args.get('lores'):
+		image = soup.find('div', 'fullImageLink').find('a').get('href')
 
 
 	print 'Opened image page in %s seconds' % (time.time()-start)
