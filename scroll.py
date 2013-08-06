@@ -55,6 +55,13 @@ def foundation():
 
 	return render_template('scroll-foundation.html', image=image, content=content)
 
+def get_full_image(link):
+	parts = link.split('/')
+	parts.pop(3)
+	parts.pop(6)
+	new_link = parts[0] + '//' + parts[2] + '/' + parts[3] + '/' + parts[4] + '/' + parts[5]
+	return new_link
+
 @app.route('/npc', methods=['GET'])
 def npc():
 	import json, random, time
@@ -79,14 +86,18 @@ def npc():
 
 	num = random.randint(0, len(items)-1)
 
+	thumb_link = items[num].find('img').get('src')
+	image = get_full_image(thumb_link)
+
+	if request.args.get('json'):
+		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
+
 	link = items[num].find('a').get('href')
 	link = 'http://www.uesp.net' + link
 
 	soup = BeautifulSoup(urllib2.urlopen(link))
-	image = soup.find('div', 'fullImageLink').find('a').get('href')
+	#image = soup.find('div', 'fullImageLink').find('a').get('href')
 
-	if request.args.get('json'):
-		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
 	print 'Opened image page in %s seconds' % (time.time()-start)
 
