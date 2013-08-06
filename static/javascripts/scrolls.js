@@ -9,7 +9,7 @@ function ScrollsCtrl ($scope, $http) {
 		$scope.test();
 	});
 	$scope.test = function () {
-		$http.get('/npc').then(function (response) {
+		$http.get('/npc?lores=true').then(function (response) {
 			if ($scope.npcs[lastIndex].length < 3) {
 				$scope.npcs[lastIndex].push(response.data)
 			}

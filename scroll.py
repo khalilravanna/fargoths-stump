@@ -89,7 +89,7 @@ def npc():
 	thumb_link = items[num].find('img').get('src')
 	image = get_full_image(thumb_link)
 
-	if request.args.get('json'):
+	if request.args.get('image_only') and not request.args.get('lores'):
 		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
 	link = items[num].find('a').get('href')
@@ -97,7 +97,9 @@ def npc():
 
 	soup = BeautifulSoup(urllib2.urlopen(link))
 	if request.args.get('lores'):
-		image = soup.find('div', 'fullImageLink').find('a').get('href')
+		image = soup.find('div', 'fullImageLink').find('img').get('src')
+		if request.args.get('image_only'):
+			return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
 
 	print 'Opened image page in %s seconds' % (time.time()-start)
