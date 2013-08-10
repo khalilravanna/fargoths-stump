@@ -108,6 +108,18 @@ def npc():
 	page = 'http://www.uesp.net' + page
 	
 	soup = BeautifulSoup(urllib2.urlopen(page))
+
+	# replace all links with their full path first
+	links = soup.find_all('a')
+	for link in links:
+		split = str(link.get('href')).split('/')
+		if len(split) > 1:
+			if split[1] == 'wiki':
+				old_link = str(link.get('href'))
+				new_link = 'http://www.uesp.net' + old_link
+				print new_link
+				link['href'] = new_link
+
 	paragraphs = soup.find('div', 'mw-content-ltr').find_all('p') 
 
 	print 'Opened npc page in %s seconds' % (time.time()-start)
@@ -127,4 +139,4 @@ def npc():
 	#return render_template('scroll-angular.html', image=image, content=content, title=title)
 	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
-#app.run(debug=True)
+app.run(debug=True)
