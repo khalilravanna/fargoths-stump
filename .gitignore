@@ -1,3 +1,7 @@
+static/javascripts/foundation/
+bower_components/
+.sass-cache/
 venv
 *.pyc
 .DS_Store
+node_modules/
