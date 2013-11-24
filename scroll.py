@@ -117,6 +117,13 @@ def npc():
 	thumb_link = items[num].find('img').get('src')
 	image = get_full_image(thumb_link)
 
+	myScroll = db.scrolls.find_one({'image':image})
+	if not myScroll:
+  		myScroll = {'image':image, 'count':1}
+	else:
+		myScroll['count'] += 1
+	db.scrolls.save(myScroll)
+
 	if request.args.get('image_only') and not request.args.get('lores'):
 		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
