@@ -77,8 +77,6 @@ def foundation():
 
 	content = soup.find('p')
 
-	print content
-
 	return render_template('scroll-foundation.html', image=image, content=content)
 
 def get_full_image(link):
@@ -89,8 +87,10 @@ def get_full_image(link):
 	return new_link
 
 def check_scroll(image):
+	print image
 	myScroll = db.scrolls.find_one({'image':image})
 	if myScroll:
+		print myScroll
 		return myScroll
 	return False
 
@@ -125,7 +125,7 @@ def npc():
 	soup = BeautifulSoup(urllib2.urlopen(npc_urls[random_page]))
 	items = soup.find_all('li', 'gallerybox')
 
-	print 'Opened index page in %s seconds' % (time.time()-start)
+	# print 'Opened index page in %s seconds' % (time.time()-start)
 
 	num = random.randint(0, len(items)-1)
 
@@ -150,7 +150,7 @@ def npc():
 			return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
 
-	print 'Opened image page in %s seconds' % (time.time()-start)
+	# print 'Opened image page in %s seconds' % (time.time()-start)
 
 	page = soup.find(id='mw-imagepage-linkstoimage-ns110').find('a').get('href') # ns110 seems to be the code for the actual page
 	page = 'http://www.uesp.net' + page
@@ -165,12 +165,12 @@ def npc():
 			if split[1] == 'wiki':
 				old_link = str(link.get('href'))
 				new_link = 'http://www.uesp.net' + old_link
-				print new_link
+
 				link['href'] = new_link
 
 	paragraphs = soup.find('div', 'mw-content-ltr').find_all('p') 
 
-	print 'Opened npc page in %s seconds' % (time.time()-start)
+	# print 'Opened npc page in %s seconds' % (time.time()-start)
 
 	try:
 		title = paragraphs[6].find('b').text
@@ -182,7 +182,7 @@ def npc():
 		content = content + str(paragraphs[num])
 	#print content
 
-	print 'Total time: %s seconds' % (time.time()-start)
+	# print 'Total time: %s seconds' % (time.time()-start)
 
 	scroll = {'title': title, 'image': image, 'content': content}
 	save_scroll(scroll)
