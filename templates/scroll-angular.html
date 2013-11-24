@@ -1,6 +1,5 @@
 <html style="background-color:#fff0cf;" ng-app="scrolls">
 	<head>
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Henny+Penny' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="static/css/app.css" />
 		<style type="text/css">
@@ -23,12 +22,10 @@
 
 			.fargoth:hover {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
-				background-image: 
 			} 
-
-			/*.fargoth:before {
-				content: ''
-			}*/
+			.fargoth:before {
+				content:  "\f015";				
+			}
 
 			.header:hover .fargoth {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
@@ -64,7 +61,7 @@
 	        <div class="hide-for-small row">
 		        <div ng-repeat="npc in list" ng-show="npc.content" class="large-4 columns">
 		            <div style="height:217px; overflow-y:scroll;" class="panel">
-		                <h5>{{ npc.title }}</h5>
+		                <h5><i class="fa fa-user"></i> {{ npc.title }}</h5>
 		                <p ng-bind-html-unsafe="npc.content"></p>
 		            </div>
 		        </div>
