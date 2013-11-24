@@ -27,6 +27,9 @@
 			.header:hover .fargoth {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
 			}
+			.float-right {
+				float:right;
+			}
         </style>
 	</head>
 	<body style="background-color:#fff0cf; margin-top:20px;" ng-controller="ScrollsCtrl">
@@ -58,7 +61,7 @@
 	        <div class="hide-for-small row">
 		        <div ng-repeat="npc in list" ng-show="npc.content" class="large-4 columns">
 		            <div style="height:217px; overflow-y:scroll;" class="panel">
-		                <h5><i class="fa fa-user"></i> {{ npc.title }}</h5>
+		                <h5><i class="fa fa-user"></i> {{ npc.title }} <i ng-show="npc.cached" class="float-right fa fa-star"></i></h5>
 		                <p ng-bind-html-unsafe="npc.content"></p>
 		            </div>
 		        </div>

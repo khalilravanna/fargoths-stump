@@ -90,12 +90,15 @@ def get_full_image(link):
 
 def save_scroll(scroll):
 	myScroll = db.scrolls.find_one({'image':scroll['image']})
+	cached = False
 	if not myScroll:
   		myScroll = scroll
   		myScroll['count'] = 1
 	else:
+		cached = True
 		myScroll['count'] += 1
 	db.scrolls.save(myScroll)
+	return cached
 
 @app.route('/npc', methods=['GET'])
 def npc():
@@ -174,8 +177,8 @@ def npc():
 	print 'Total time: %s seconds' % (time.time()-start)
 
 	scroll = {'title': title, 'image': image, 'content': content}
-	save_scroll(scroll)
-	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
+	cached = save_scroll(scroll)
+	return (json.dumps({'title': title, 'image': image, 'content': content, 'cached': cached}), 200, {'Access-Control-Allow-Origin': '*'})
 
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.
