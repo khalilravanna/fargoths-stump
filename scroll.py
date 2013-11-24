@@ -87,10 +87,8 @@ def get_full_image(link):
 	return new_link
 
 def check_scroll(image):
-	print image
 	myScroll = db.scrolls.find_one({'image':image})
 	if myScroll:
-		print myScroll
 		return myScroll
 	return False
 
@@ -132,11 +130,6 @@ def npc():
 	thumb_link = items[num].find('img').get('src')
 	image = get_full_image(thumb_link)
 
-	cached = check_scroll(image)
-	if cached:
-		cached['cached'] = True
-		return (json.dumps(cached), 200, {'Access-Control-Allow-Origin': '*'})
-
 	if request.args.get('image_only') and not request.args.get('lores'):
 		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
@@ -149,6 +142,10 @@ def npc():
 		if request.args.get('image_only'):
 			return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
 
+	cached = check_scroll(image)
+	if cached:
+		cached['cached'] = True
+		return (json.dumps(cached), 200, {'Access-Control-Allow-Origin': '*'})
 
 	# print 'Opened image page in %s seconds' % (time.time()-start)
 
