@@ -7,7 +7,7 @@ from pymongo import Connection
 
 app = Flask(__name__)
 
-debug = False
+debug = True
 mock_data = False
 
 MONGO_URL = os.environ.get('MONGOHQ_URL')
@@ -167,5 +167,7 @@ def npc():
 	#return render_template('scroll-angular.html', image=image, content=content, title=title)
 	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
-if debug:
-	app.run(debug=debug)
+if __name__ == '__main__':
+  # Bind to PORT if defined, otherwise default to 5000.
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port, debug=debug)
