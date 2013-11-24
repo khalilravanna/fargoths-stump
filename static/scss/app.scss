@@ -1,3 +1,13 @@
 @import "settings";
 @import "foundation";
 @import "font_awesome/font-awesome";
+
+.fargoth {
+	border-radius: 100px;
+	box-shadow: 0px 0px 0px 3pt #0c0c0c, 0px 0px 0px 6pt #fa6a6a, 0px 0px 0px 9pt #0c0c0c;
+
+	-moz-transition:moz-box-shadow 0.5s;
+	-webkit-transition:webkit-box-shadow 0.5s;
+	-o-transition:box-shadow 0.5s;
+	transition:box-shadow 0.5s;
+}

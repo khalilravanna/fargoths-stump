@@ -1,0 +1,35 @@
+<html>
+	<body>
+		<head>
+			<link rel="stylesheet" href="static/css/app.css" />
+		</head>
+		<a href="/">
+			<img class="" src="static/images/fourohfargoth.png">
+		</a>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript">
+			for (var i=0; i < 30; i++) {
+				var fargoth = $('<img class="fargoth fa-spin" style="position:absolute; width:50px; height:50px" src="static/images/fargoth-head-trans.png">')
+				$('body').append(fargoth);
+			}
+			var fargoths = $('.fargoth');
+			var moveHeads = function () {
+				setInterval(function () {
+					var left = Math.floor(Math.random()*540);
+					var subset = Math.floor(Math.random()*8);
+					var start = fargoths.length * (subset/8);
+					var end = fargoths.length * ((subset+1)/8);
+					for (var i=start; i < end; i++) {
+						$(fargoths[i]).css('left', left);
+					}
+				}, 200);
+				setInterval(function () {
+					var randomFargoth = Math.floor(Math.random()*fargoths.length);
+					var height = Math.floor(Math.random()*600);
+					$(fargoths[randomFargoth]).css('top', height);
+				}, 100)
+			}
+			moveHeads();
+		</script>
+	</body>
+</html>
