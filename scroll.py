@@ -88,17 +88,20 @@ def get_full_image(link):
 	new_link = parts[0] + '//' + parts[2] + '/' + parts[3] + '/' + parts[4] + '/' + parts[5]
 	return new_link
 
+def check_scroll(image):
+	myScroll = db.scrolls.find_one({'image':image})
+	if myScroll:
+		return myScroll
+	return False
+
 def save_scroll(scroll):
 	myScroll = db.scrolls.find_one({'image':scroll['image']})
-	cached = False
 	if not myScroll:
   		myScroll = scroll
   		myScroll['count'] = 1
 	else:
-		cached = True
 		myScroll['count'] += 1
 	db.scrolls.save(myScroll)
-	return cached
 
 @app.route('/npc', methods=['GET'])
 def npc():
@@ -128,6 +131,11 @@ def npc():
 
 	thumb_link = items[num].find('img').get('src')
 	image = get_full_image(thumb_link)
+
+	cached = check_scroll(image)
+	if cached:
+		cached['cached'] = True
+		return (json.dumps(cached), 200, {'Access-Control-Allow-Origin': '*'})
 
 	if request.args.get('image_only') and not request.args.get('lores'):
 		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
@@ -177,8 +185,8 @@ def npc():
 	print 'Total time: %s seconds' % (time.time()-start)
 
 	scroll = {'title': title, 'image': image, 'content': content}
-	cached = save_scroll(scroll)
-	return (json.dumps({'title': title, 'image': image, 'content': content, 'cached': cached}), 200, {'Access-Control-Allow-Origin': '*'})
+	save_scroll(scroll)
+	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
 if __name__ == '__main__':
   # Bind to PORT if defined, otherwise default to 5000.
