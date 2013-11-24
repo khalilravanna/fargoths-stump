@@ -1,8 +1,8 @@
 <html style="background-color:#fff0cf;" ng-app="scrolls">
 	<head>
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Henny+Penny' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="static/stylesheets/app.css" />
+		<link rel="stylesheet" href="static/css/app.css" />
 		<style type="text/css">
             h1 {
                 font-family: 'Henny Penny', cursive;
@@ -23,7 +23,12 @@
 
 			.fargoth:hover {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
-			}
+				background-image: 
+			} 
+
+			/*.fargoth:before {
+				content: ''
+			}*/
 
 			.header:hover .fargoth {
 				box-shadow: 0px 0px 0px 0pt #fff0cf;
@@ -43,7 +48,7 @@
 		</div>
 
 		<div ng-show="npcs.length < 2" style="max-width:242px; background-color:#fa6a6a; border-radius:150px;" class="center row panel">
-			<img class="icon-spin" style="width:200px; height:200px" src="static/images/loading-fargoth.png">
+			<img class="fa-spin" style="width:200px; height:200px" src="static/images/loading-fargoth.png">
 		</div>
 		{% raw %}
         <div ng-hide="npcs.length < 2" ng-repeat="list in npcs">
@@ -66,9 +71,12 @@
 	        </div>
         </div>
         {% endraw %}
+        <div infinite-scroll="test()"></div>
         <!--script type="text/javascript" src="http://code.angularjs.org/1.1.5/angular.js"></script-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
 		<script type="text/javascript" src="static/javascripts/scrolls.js"></script>
 		<script type="text/javascript" src="static/javascripts/directives.js"></script>
+		<script type="text/javascript" src="static/javascripts/ng-infinite-scroll.js"></script>
 	</body>
 </html>
