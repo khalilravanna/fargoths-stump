@@ -145,7 +145,7 @@ def npc():
 	cached = check_scroll(image)
 	if cached:
 		cached['cached'] = True
-		return (json.dumps(cached), 200, {'Access-Control-Allow-Origin': '*'})
+		return (json.dumps({'title': cached['title'], 'image': cached['image'], 'content': cached['content'], 'cached': cached['cached']}), 200, {'Access-Control-Allow-Origin': '*'})
 
 	# print 'Opened image page in %s seconds' % (time.time()-start)
 
