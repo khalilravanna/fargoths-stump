@@ -89,7 +89,7 @@ def get_full_image(link):
 	return new_link
 
 def check_scroll(image):
-	myScroll = db.scrolls.find_one({'image':scroll['image']})
+	myScroll = db.scrolls.find_one({'image':image})
 	if myScroll:
 		return myScroll
 	return False
