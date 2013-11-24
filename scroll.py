@@ -88,6 +88,15 @@ def get_full_image(link):
 	new_link = parts[0] + '//' + parts[2] + '/' + parts[3] + '/' + parts[4] + '/' + parts[5]
 	return new_link
 
+def save_scroll(scroll):
+	myScroll = db.scrolls.find_one({'image':scroll['image']})
+	if not myScroll:
+  		myScroll = scroll
+  		myScroll['count'] = 1
+	else:
+		myScroll['count'] += 1
+	db.scrolls.save(myScroll)
+
 @app.route('/npc', methods=['GET'])
 def npc():
 	import json, random, time
@@ -116,13 +125,6 @@ def npc():
 
 	thumb_link = items[num].find('img').get('src')
 	image = get_full_image(thumb_link)
-
-	myScroll = db.scrolls.find_one({'image':image})
-	if not myScroll:
-  		myScroll = {'image':image, 'count':1}
-	else:
-		myScroll['count'] += 1
-	db.scrolls.save(myScroll)
 
 	if request.args.get('image_only') and not request.args.get('lores'):
 		return (json.dumps({'image': image}), 200, {'Access-Control-Allow-Origin': '*'})
@@ -171,7 +173,8 @@ def npc():
 
 	print 'Total time: %s seconds' % (time.time()-start)
 
-	#return render_template('scroll-angular.html', image=image, content=content, title=title)
+	scroll = {'title': title, 'image': image, 'content': content}
+	save_scroll(scroll)
 	return (json.dumps({'title': title, 'image': image, 'content': content}), 200, {'Access-Control-Allow-Origin': '*'})
 
 if __name__ == '__main__':
