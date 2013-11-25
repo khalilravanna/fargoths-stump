@@ -77,7 +77,7 @@
 	        <div class="hide-for-small row">
 		        <div ng-repeat="npc in list" ng-show="npc.content" class="large-4 columns">
 		            <div style="height:217px; overflow-y:scroll;" class="panel">
-		                <h5><i class="fa fa-user"></i> {{ npc.title }} <i ng-show="npc.cached" class="float-right fa fa-star"></i></h5>
+		                <h5><i class="fa fa-user"></i> {{ npc.title }} <i ng-show="npc.cached" title="This means this one has been loaded before. Yay caches!" class="float-right fa fa-star"></i></h5>
 		                <p ng-bind-html-unsafe="npc.content"></p>
 		            </div>
 		        </div>
@@ -87,6 +87,8 @@
         <div infinite-scroll="test()"></div>
         <!--script type="text/javascript" src="http://code.angularjs.org/1.1.5/angular.js"></script-->
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="static/javascripts/foundation/foundation.js"></script>
+		<script src="static/javascripts/foundation/foundation.tooltips.js"></script>
 		<script type="text/javascript" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
 		<script type="text/javascript" src="static/javascripts/scrolls.js"></script>
 		<script type="text/javascript" src="static/javascripts/directives.js"></script>
