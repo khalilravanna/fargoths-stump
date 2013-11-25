@@ -29,5 +29,27 @@ function ScrollsCtrl ($scope, $http) {
 			}
 		});
 	};
+
+	$scope.totalNpcs = function () {
+		var total = 0;
+		for (var i=0; i < $scope.npcs.length; i++) {
+			total += $scope.npcs[i].length;
+		}
+		return total;
+	}
+
+	$scope.iconPlace = function (i, j) {
+		var place = ((i-1)*3) + j;
+		console.log(place);
+		return place;
+	}
+
+	$scope.ghettoRange = function (num) {
+		var newList = [];
+		for (var i=0; i < num; i++) {
+			newList.push(i+1);
+		}
+		return newList;
+	}
 }
 app.controller(ScrollsCtrl)

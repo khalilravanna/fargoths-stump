@@ -21,9 +21,30 @@
 			.float-right {
 				float:right;
 			}
+			.fargoth-spinner-wrapper-loaded {
+				margin:0 auto; 
+				display:block; 
+				background-color:#fa6a6a; 
+				border-radius:150px;
+				width:200px; 
+				height:200px;
+			}
+			.fargoth-spinner-wrapper-unloaded {
+				border: #FA6A6A dotted 10px;
+				margin:0 auto; 
+				display:block; 
+				border-radius:150px;
+				width:200px; 
+				height:200px;
+			}
+			.fargoth-spinner {
+				width:200px; 
+				height:200px;
+			}
         </style>
 	</head>
 	<body style="background-color:#fff0cf; margin-top:20px;" ng-controller="ScrollsCtrl">
+		{% raw %}
 		<div style="border-radius:10px; border-color:#1cbabc; background-color:#68c39f;" class="header row panel">
 			<a href="http://whats.gd" target="_blank">
 				<img class="fargoth" style="float:right; width:50px; height:50px" src="static/images/fargoth-head-trans.png">
@@ -34,12 +55,16 @@
 			
 			<h1 class="center title">Fargoth's Stump</h1>
 		</div>
-
-		<div ng-show="npcs.length < 2" style="max-width:242px; background-color:#fa6a6a; border-radius:150px;" class="center row panel">
-			<img class="fa-spin" style="width:200px; height:200px" src="static/images/loading-fargoth.png">
-		</div>
-		{% raw %}
-        <div ng-hide="npcs.length < 2" ng-repeat="list in npcs">
+		<div ng-show="totalNpcs() !== 9" class="row" ng-repeat="i in ghettoRange(3)">
+        	<div ng-repeat="j in ghettoRange(3)" class="large-4 columns">
+        		<div style="border:0; background:transparent;" class="panel">
+        			<div ng-class="{'fargoth-spinner-wrapper-loaded': iconPlace(i, j) <= totalNpcs(), 'fargoth-spinner-wrapper-unloaded': iconPlace(i, j) > totalNpcs()}">
+        				<img ng-show="iconPlace(i, j) === totalNpcs()" class="fa-spin fargoth-spinner" src="static/images/loading-fargoth.png">
+        			</div>
+				</div>
+            </div>
+       	</div>
+        <div ng-hide="totalNpcs() !== 9" ng-repeat="list in npcs">
         	<div class="row">
 	            <div ng-repeat="npc in list" class="large-4 columns">
 	                <div class="panel">
