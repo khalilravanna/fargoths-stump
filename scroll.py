@@ -10,8 +10,8 @@ app = Flask(__name__)
 debug = True
 mock_data = False
 
-MONGO_URL = os.environ.get('MONGOHQ_URL')
-
+MONGO_URL = os.environ.get('MONGOLAB_URI')
+ 
 if MONGO_URL:
   # Get a connection
   connection = Connection(MONGO_URL)
