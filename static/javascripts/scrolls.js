@@ -1,6 +1,6 @@
 app = angular.module('scrolls', ['infinite-scroll']);
 
-function ScrollsCtrl ($scope, $http) {
+var ScrollsCtrl = function ($scope, $http) {
 	$scope.name = 'Stefan';
 	$scope.npcs = [
 		[]
@@ -10,11 +10,19 @@ function ScrollsCtrl ($scope, $http) {
 	$scope.$evalAsync(function () {
 		$scope.getNpcs();
 	});
-	$scope.test = function () {
-		console.log('sup');
-	}
+
 	$scope.getNpcs = function () {
-		$http.get('/npc?lores=true').then(function (response) {
+		// $http.get('/npc', {
+		// 	params: {
+		// 		lores: true,
+		// 		count: 9
+		// 	}
+		// });
+		$http.get('/npc', {
+			params: {
+				// lores: true
+			}
+		}).then(function (response) {
 			if ($scope.npcs[lastIndex].length < 3) {
 				$scope.npcs[lastIndex].push(response.data)
 			}
@@ -51,5 +59,6 @@ function ScrollsCtrl ($scope, $http) {
 		}
 		return newList;
 	}
-}
-app.controller(ScrollsCtrl)
+};
+
+app.controller(ScrollsCtrl);
